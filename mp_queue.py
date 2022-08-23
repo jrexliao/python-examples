@@ -16,10 +16,10 @@ def consumer(queue):
         product = queue.get()
         if product == 'done': break
 
-        # print the object ID of the product we have received. We expect this ID
-        # to be the same as the ID printed by the producer. If it is, it means
-        # that the data put in queue was not copied, and thus did not take
-        # additional memory space.
+        # print the object ID of the product we have received. If it is the same,
+        # it means that the data put in queue was not copied, and thus did not take
+        # additional memory space. But we expect it to be different, due to the
+        # nature of multiprocessing.
         print("Consumer Product ", i, " ID: ", id(product))
 
         # print the product that we received, to check if it matches the product
@@ -39,10 +39,10 @@ def producer(queue):
     for i in range(10):
         product = torch.tensor([i,2,3]) if i % 2 == 0 else torch.tensor([i, 4, 5])
 
-        # print the object ID of the product we have generated. We expect this ID
-        # to be the same as the ID printed by the consumer> If it is, it means that
-        # the data put in the queue was not copied, and thus did not take additional
-        # memory space.
+        # print the object ID of the product we have generated. If it is the same, it
+        # means that the data put in the queue was not copied, and thus did not take
+        # additional memory space. But we expect it to be different, due to the
+        # nature of multiprocessing.
         print("Producer Product ", i, " ID: ", id(product))
         queue.put(product)
 
