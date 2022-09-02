@@ -46,8 +46,6 @@ def producer(queue):
         print("Producer Product ", i, " ID: ", id(product))
         queue.put(product)
 
-        if i == 4: print(doesnotexist)
-
     # once we have generated all the data we want, send a message to the consumer
     # telling it that the task has been completed.
     queue.put('done')
